@@ -13,10 +13,6 @@
             <ion-input type="text" value="" placeholder="Título da Anotação" [(ngModel)]="note.title"></ion-input>
         </ion-item>
     </ion-list>
-    <ckeditor [(ngModel)]="ckeditorContent">
-        <ckbutton [name]="'saveButton'" [command]="'saveCmd'" (click)="save($event)" [icon]="'save.png'" [label]="'Save Document'" [toolbar]="'clipboard,1'">
-        </ckbutton>
-    </ckeditor>
     <textarea rows="15" placeholder="Anotação aqui..." style="width: 100%; border: none;" [(ngModel)]="note.text">
   </textarea>
 

@@ -14,7 +14,6 @@ export class HomePage {
   }
 
   private loadNotes() {
-    this.notes = [];
     this.noteService.getNotes().then(
       data => {
         this.notes = [];
@@ -27,17 +26,14 @@ export class HomePage {
       });
   }
 
-  // Push the details page bute without an existing note
   public addNote() {
     this.nav.push(NoteDetailPage);
   }
 
-  // Push the details page for our selected Note
   public noteSelected(item: Note) {
     this.nav.push(NoteDetailPage, { 'note': item });
   }
 
-  // Remove the note from the DB and our current arra
   public removeNote(note: Note) {
     this.noteService.removeNote(note);
     let index = this.notes.indexOf(note);
@@ -47,12 +43,7 @@ export class HomePage {
     }
   }
 
-  // Load our todos once the page appears
-  private ionViewDidEnter() {
-    this.loadNotes();
-  }
-
-  private ionViewLoaded(){
+  ionViewWillEnter() {
     this.loadNotes();
   }
 
