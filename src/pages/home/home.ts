@@ -1,12 +1,18 @@
+<<<<<<< HEAD
 import { NavController } from 'ionic-angular';
 import { NoteServiceProvider, Note } from '../../providers/note-service/note-service';
 import { NoteDetailPage } from '../note-detail/note-detail';
 import { Component } from '@angular/core';
+=======
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+>>>>>>> a635465554b206490ad996b72a8cd429b7924e92
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+<<<<<<< HEAD
 
 export class HomePage {
   notes: Note[];
@@ -45,6 +51,12 @@ export class HomePage {
 
   ionViewDidLoad(){
     this.loadNotes();
+=======
+export class HomePage {
+
+  constructor(public navCtrl: NavController) {
+
+>>>>>>> a635465554b206490ad996b72a8cd429b7924e92
   }
 
 }
