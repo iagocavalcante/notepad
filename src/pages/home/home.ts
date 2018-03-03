@@ -1,5 +1,5 @@
 import { NavController } from 'ionic-angular';
-import { NoteService, Note } from '../../providers/note-service/note-service';
+import { NoteServiceProvider, Note } from '../../providers/note-service/note-service';
 import { NoteDetailPage } from '../note-detail/note-detail';
 import { Component } from '@angular/core';
 
@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 
 export class HomePage {
   notes: Note[];
-  constructor(public nav: NavController, public noteService: NoteService) {
+  constructor(public nav: NavController, public noteService: NoteServiceProvider) {
   }
 
   private loadNotes() {
@@ -43,7 +43,7 @@ export class HomePage {
     }
   }
 
-  ionViewWillEnter() {
+  ionViewDidLoad(){
     this.loadNotes();
   }
 

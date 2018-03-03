@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController} from 'ionic-angular';
-import { NoteService, Note} from '../../providers/note-service/note-service';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { NoteServiceProvider, Note} from '../../providers/note-service/note-service';
 
+@IonicPage()
 @Component({
   selector: 'page-note-detail',
   templateUrl: 'note-detail.html'
@@ -10,7 +11,7 @@ export class NoteDetailPage {
 
   note: Note = null;
  
-  constructor(public nav: NavController, navParams: NavParams, public noteService: NoteService, private toastCtrl: ToastController) {
+  constructor(public nav: NavController, navParams: NavParams, public noteService: NoteServiceProvider, private toastCtrl: ToastController) {
     let passedNote = navParams.get('note');
     
     if (passedNote !== undefined) {

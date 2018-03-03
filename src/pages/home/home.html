@@ -1,30 +1,31 @@
 <ion-header>
-    <ion-navbar class="page-home">
-        <ion-title>
-            Minhas Notas
-        </ion-title>
-        <ion-buttons end>
-            <button ion-button icon-only (click)="addNote()">
-                <ion-icon name="add"></ion-icon>
-            </button>
-        </ion-buttons>
-    </ion-navbar>
+  <ion-navbar class="page-home">
+    <ion-title>
+      Minhas Notas
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addNote()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content class="page-home">
-    <ion-list class="page-home">
-        <ion-item-sliding *ngFor="let note of notes">
-            <button ion-item (click)="noteSelected(note)">
-                <ion-item>
-                    <h2>{{note.title}}</h2>
-                    <p>{{note.text}}</p>
-                </ion-item>
-            </button>
+  <ion-list class="page-home">
+    <ion-item-sliding *ngFor="let note of notes">
+      <button ion-item (click)="noteSelected(note)">
+        <ion-item>
+          <h2>{{note.title}}</h2>
+          <p>{{note.text}}</p>
+        </ion-item>
+      </button>
 
-            <ion-item-options>
-                <button ion-button color="danger" (click)="removeNote(note)"><ion-icon name="trash"></ion-icon> Apagar</button>
-            </ion-item-options>
-        </ion-item-sliding>
+      <ion-item-options>
+        <button ion-button color="danger" (click)="removeNote(note)">
+          <ion-icon name="trash"></ion-icon> Apagar</button>
+      </ion-item-options>
+    </ion-item-sliding>
 
-    </ion-list>
+  </ion-list>
 </ion-content>

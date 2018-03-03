@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SQLite } from 'ionic-native';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import 'rxjs/add/operator/map';
 
 export class Note {
@@ -14,12 +14,14 @@ export class Note {
 }
 
 @Injectable()
-export class NoteService {
-  public sqlstorage: SQLite;
-
-  constructor() {
-    this.sqlstorage = new SQLite();
-    this.sqlstorage.openDatabase({ name: "notes.db", location: "default" }).then(() => {
+export class NoteServiceProvider {
+  public sqliteObject: SQLiteObject;
+  constructor(private sqlite: SQLite) {
+    this.sqliteObject = new SQLiteObject(this.sqlite);
+    this.sqlite.create({
+      name: 'notes.db',
+      location: 'default'
+    }).then(() => {
       this.createTables();
     }, (err) => {
       console.log("!!! ", err);
@@ -28,30 +30,30 @@ export class NoteService {
 
 
   public createTables() {
-    this.sqlstorage.executeSql(`create table if not exists notes(
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT, 
-            text TEXT
-        )`, {});
+    this.sqliteObject.executeSql(`create table if not exists notes(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT, 
+        text TEXT
+      )`, {});
   }
-  
+
   public getNotes() {
-    return this.sqlstorage.executeSql('SELECT * FROM notes', []);
+    return this.sqliteObject.executeSql('SELECT * FROM notes', []);
   }
 
   public saveNote(note: Note) {
     let sql = 'INSERT INTO notes (title, text) VALUES (?,?)';
-    return this.sqlstorage.executeSql(sql, [note.title, note.text]);
+    return this.sqliteObject.executeSql(sql, [note.title, note.text]);
   }
 
   public updateNote(note: Note) {
     let sql = 'UPDATE notes SET title = \"' + note.title + '\", text = \"' + note.text + '\" WHERE id = \"' + note.id + '\"';
-    this.sqlstorage.executeSql(sql, []);
+    this.sqliteObject.executeSql(sql, []);
   }
 
   public removeNote(note: Note) {
     let sql = 'DELETE FROM notes WHERE id = \"' + note.id + '\"';
-    this.sqlstorage.executeSql(sql, []);
+    this.sqliteObject.executeSql(sql, []);
   }
 
 }

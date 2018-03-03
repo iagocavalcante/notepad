@@ -1,23 +1,23 @@
-import { NgModule, ErrorHandler } from '@angular/core';
-import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { NoteDetailPage } from './../pages/note-detail/note-detail';
+import { BrowserModule } from '@angular/platform-browser';
+import { ErrorHandler, NgModule } from '@angular/core';
+import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import { SQLite } from '@ionic-native/sqlite';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { NoteDetailPage } from '../pages/note-detail/note-detail';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { NoteService } from '../providers/note-service/note-service';
-import {CKEditorModule} from 'ng2-ckeditor';
-
+import { NoteServiceProvider } from '../providers/note-service/note-service';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage, 
+    HomePage,
     NoteDetailPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp),
-    CKEditorModule
+    BrowserModule,
+    IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -26,10 +26,11 @@ import {CKEditorModule} from 'ng2-ckeditor';
     NoteDetailPage
   ],
   providers: [
-    NoteService,
     StatusBar,
+    SQLite,
     SplashScreen,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    NoteServiceProvider
   ]
 })
-export class AppModule { }
+export class AppModule {}
