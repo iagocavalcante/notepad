@@ -1,6 +1,6 @@
 {
   "name": "notepad2",
-  "app_id": "",
+  "app_id": "a4148850",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
