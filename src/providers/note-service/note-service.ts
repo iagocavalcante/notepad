@@ -15,13 +15,16 @@ export class Note {
 
 @Injectable()
 export class NoteServiceProvider {
+  
   public sqliteObject: SQLiteObject;
+
   constructor(private sqlite: SQLite) {
-    this.sqliteObject = new SQLiteObject(this.sqlite);
     this.sqlite.create({
       name: 'notes.db',
       location: 'default'
-    }).then(() => {
+    }).then((db: SQLiteObject) => {
+      console.log(db)
+      this.sqliteObject = db;
       this.createTables();
     }, (err) => {
       console.log("!!! ", err);
