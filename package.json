@@ -33,7 +33,7 @@
     "cordova-sqlite-storage": "4.0.0",
     "ionic-angular": "3.9.9",
     "ionicons": "4.6.3",
-    "rxjs": "6.5.3",
+    "rxjs": "6.5.4",
     "sw-toolbox": "3.6.0",
     "zone.js": "0.10.2"
   },
