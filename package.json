@@ -43,7 +43,7 @@
     "cordova-plugin-ionic-webview": "5.0.0",
     "extend": "3.0.2",
     "hoek": "6.1.3",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "randomatic": "3.1.1",
     "typescript": "3.9.6"
   },
