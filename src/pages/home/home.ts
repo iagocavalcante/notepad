@@ -1,24 +1,38 @@
-import { NavController } from 'ionic-angular';
-import { NoteServiceProvider, Note } from '../../providers/note-service/note-service';
-import { NoteDetailPage } from '../note-detail/note-detail';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { NoteServiceProvider } from '../../providers/note-service/note-service';
+import { Note } from '../../providers/note-service/note';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'app-home',
+  templateUrl: './home.html',
+  standalone: true,
+  imports: [IonicModule, CommonModule]
 })
+export class HomePage implements OnInit {
+  notes: Note[] = [];
 
-export class HomePage {
-  notes: Note[];
-  constructor(public nav: NavController, public noteService: NoteServiceProvider) {
+  constructor(
+    private router: Router,
+    public noteService: NoteServiceProvider
+  ) {}
+
+  ngOnInit() {
+    this.loadNotes();
+  }
+
+  ionViewWillEnter() {
+    this.loadNotes();
   }
 
   private loadNotes() {
     this.noteService.getNotes().then(
-      data => {
+      (data: any) => {
         this.notes = [];
         if (data.rows.length > 0) {
-          for (var i = 0; i < data.rows.length; i++) {
+          for (let i = 0; i < data.rows.length; i++) {
             let item = data.rows.item(i);
             this.notes.push(new Note(item.title, item.text, item.id));
           }
@@ -27,11 +41,11 @@ export class HomePage {
   }
 
   public addNote() {
-    this.nav.push(NoteDetailPage);
+    this.router.navigate(['/note-detail']);
   }
 
   public noteSelected(item: Note) {
-    this.nav.push(NoteDetailPage, { 'note': item });
+    this.router.navigate(['/note-detail', { note: JSON.stringify(item) }]);
   }
 
   public removeNote(note: Note) {
@@ -42,9 +56,4 @@ export class HomePage {
       this.notes.splice(index, 1);
     }
   }
-
-  ionViewDidLoad(){
-    this.loadNotes();
-  }
-
 }

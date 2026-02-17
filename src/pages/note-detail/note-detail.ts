@@ -1,50 +1,54 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
-import { NoteServiceProvider, Note} from '../../providers/note-service/note-service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { NoteServiceProvider } from '../../providers/note-service/note-service';
+import { Note } from '../../providers/note-service/note';
 
-@IonicPage()
 @Component({
-  selector: 'page-note-detail',
-  templateUrl: 'note-detail.html'
+  selector: 'app-note-detail',
+  templateUrl: './note-detail.html',
+  standalone: true,
+  imports: [IonicModule, CommonModule, FormsModule]
 })
-export class NoteDetailPage {
+export class NoteDetailPage implements OnInit {
+  note: Note | undefined;
 
-  note: Note = null;
- 
-  constructor(public nav: NavController, navParams: NavParams, public noteService: NoteServiceProvider, private toastCtrl: ToastController) {
-    let passedNote = navParams.get('note');
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public noteService: NoteServiceProvider
+  ) {}
+
+  ngOnInit() {
+    const noteParam = this.route.snapshot.paramMap.get('note');
     
-    if (passedNote !== undefined) {
-      this.note = passedNote;
+    if (noteParam) {
+      this.note = JSON.parse(noteParam);
     } else {
       this.note = new Note('', '', null);
       this.saveNote();
     }
   }
- 
-  public saveNote(showBadge: boolean = false) {
-    if (this.note.id === null) {
-      this.noteService.saveNote(this.note).then((data) => {
+
+  public saveNote(showToast = false) {
+    if (!this.note) return;
+
+    if (!this.note.id) {
+      this.noteService.saveNote(this.note).then((data: any) => {
         console.log('Dados da promise', data);
-        this.note.id = data.insertId;
+        this.note!.id = data.insertId;
       },
-      (erro) => {
-        console.log("Erro ao inserir nova nota");
+      (erro: any) => {
+        console.log("Erro ao inserir nova nota", erro);
       });
     } else {
       this.noteService.updateNote(this.note);
     }
-    if (showBadge) {
-      let toast = this.toastCtrl.create({
-         message: 'Nota inserida com sucesso!',
-         duration: 3000
-       });
-      toast.present();
-    }
-  }
- 
-  ionViewDidLeave() {
-    this.saveNote(true);
   }
 
+  ionViewWillLeave() {
+    this.saveNote(true);
+  }
 }

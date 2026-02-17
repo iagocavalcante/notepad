@@ -1,31 +1,29 @@
 <ion-header>
-  <ion-navbar class="page-home">
-    <ion-title>
-      Minhas Notas
-    </ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="addNote()">
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-title>Minhas Notas</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="page-home">
-  <ion-list class="page-home">
-    <ion-item-sliding *ngFor="let note of notes">
-      <button ion-item (click)="noteSelected(note)">
-        <ion-item>
-          <h2>{{note.title}}</h2>
-          <p>{{note.text}}</p>
-        </ion-item>
-      </button>
-
-      <ion-item-options>
-        <button ion-button color="danger" (click)="removeNote(note)">
-          <ion-icon name="trash"></ion-icon> Apagar</button>
-      </ion-item-options>
-    </ion-item-sliding>
-
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let note of notes" button (click)="noteSelected(note)">
+      <ion-label>
+        <h2>{{ note.title }}</h2>
+        <p>{{ note.text }}</p>
+      </ion-label>
+      <ion-button fill="outline" slot="end" (click)="removeNote(note); $event.stopPropagation()">Remover</ion-button>
+    </ion-item>
   </ion-list>
+
+  <ion-item *ngIf="notes.length === 0">
+    <ion-label class="ion-text-center">
+      <ion-note>Nenhuma nota cadastrada</ion-note>
+    </ion-label>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addNote()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

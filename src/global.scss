@@ -1,0 +1,24 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ionic Component Overrides */
+ion-content {
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+}
+
+ion-item {
+  --inner-padding-end: 0;
+}
+
+ion-button {
+  --border-radius: 8px;
+}
