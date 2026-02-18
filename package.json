@@ -23,7 +23,7 @@
     "@ionic-native/sqlite": "^5.36.0",
     "@ionic-native/status-bar": "^5.36.0",
     "@ionic/angular": "^7.8.0",
-    "@ionic/angular-toolkit": "^11.0.0",
+    "@ionic/angular-toolkit": "^12.0.0",
     "@ionic/storage": "^4.0.0",
     "cordova-sqlite-storage": "^6.0.0",
     "ionicons": "^7.0.0",
@@ -35,7 +35,7 @@
     "@angular-devkit/build-angular": "^18.2.0",
     "@angular/cli": "^18.2.0",
     "@angular/compiler-cli": "^18.2.0",
-    "@ionic/angular-toolkit": "^11.0.0",
+    "@ionic/angular-toolkit": "^12.0.0",
     "typescript": "~5.4.0",
     "sass": "^1.77.0"
   },
