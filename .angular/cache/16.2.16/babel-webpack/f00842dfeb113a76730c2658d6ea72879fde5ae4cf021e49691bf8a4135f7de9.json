@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Note {\n  constructor(title, text, id) {\n    this.title = title;\n    this.text = text;\n    this.id = id;\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

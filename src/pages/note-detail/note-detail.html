@@ -1,19 +1,24 @@
 <ion-header>
-  <ion-navbar class="details">
-    <ion-title>
-      {{note.title}}
-    </ion-title>
-  </ion-navbar>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalhes da Nota</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content class="details">
-  <ion-list>
+<ion-content class="ion-padding" *ngIf="note">
+  <ion-item>
+    <ion-label position="floating">Título</ion-label>
+    <ion-input [(ngModel)]="note.title" placeholder="Digite o título"></ion-input>
+  </ion-item>
 
-    <ion-item>
-      <ion-input type="text" value="" placeholder="Título da Anotação" [(ngModel)]="note.title"></ion-input>
-    </ion-item>
-  </ion-list>
-  <textarea rows="15" placeholder="Anotação aqui..." style="width: 100%; border: none;" [(ngModel)]="note.text">
-  </textarea>
+  <ion-item>
+    <ion-label position="floating">Texto</ion-label>
+    <ion-input [(ngModel)]="note.text" placeholder="Digite o texto"></ion-input>
+  </ion-item>
 
+  <ion-button expand="block" (click)="saveNote()" class="ion-margin-top">
+    Salvar
+  </ion-button>
 </ion-content>
